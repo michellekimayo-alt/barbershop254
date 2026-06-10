@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fade Mtaani – Best Barbershop in Nakuru</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0F0F0F;
+    --charcoal: #1A1A1A;
+    --dark: #222222;
+    --amber: #F5A623;
+    --amber-dark: #D4891A;
+    --amber-glow: rgba(245,166,35,0.15);
+    --cream: #F5F0E8;
+    --muted: #8A8A8A;
+    --white: #FFFFFF;
+    --moss: #1E2318;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 5%;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+    transition: padding 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 2px;
+    color: var(--amber); text-decoration: none;
+  }
+  .nav-logo span { color: var(--white); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+  .nav-cta {
+    background: var(--amber); color: var(--black);
+    padding: 10px 22px; border-radius: 3px;
+    font-weight: 700; font-size: 0.8rem; text-decoration: none;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .nav-cta:hover { background: var(--amber-dark); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--amber); border-radius: 2px; transition: 0.3s; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0F0F0F 0%, #1A1A0A 60%, #0F0F0F 100%);
+    display: flex; align-items: center;
+    padding: 120px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(120px, 20vw, 260px);
+    color: rgba(245,166,35,0.04);
+    white-space: nowrap; pointer-events: none; user-select: none;
+    letter-spacing: 10px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--amber-glow); border: 1px solid rgba(245,166,35,0.3);
+    padding: 7px 16px; border-radius: 30px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--amber); margin-bottom: 24px;
+  }
+  .hero-badge::before {
+    content: ''; width: 7px; height: 7px;
+    background: var(--amber); border-radius: 50%;
+    animation: pulse-dot 1.5s infinite;
+  }
+  @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 9vw, 110px);
+    line-height: 0.92; letter-spacing: 2px;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .hero-title .amber { color: var(--amber); }
+  .hero-subtitle {
+    font-size: clamp(13px, 1.8vw, 16px);
+    color: var(--muted); line-height: 1.7;
+    margin: 20px 0 36px; max-width: 480px;
+  }
+  .hero-subtitle strong { color: var(--cream); }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--amber); color: var(--black);
+    padding: 15px 32px; border-radius: 4px;
+    font-weight: 700; font-size: 0.88rem; text-decoration: none;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.2s; border: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--amber-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.3); }
+  .btn-secondary {
+    border: 1px solid rgba(245,166,35,0.4); color: var(--cream);
+    padding: 15px 32px; border-radius: 4px;
+    font-weight: 600; font-size: 0.88rem; text-decoration: none;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.2s; background: transparent;
+  }
+  .btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+  .hero-tagline {
+    margin-top: 48px; padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 1.1rem; font-style: italic;
+    color: rgba(245,166,35,0.7); letter-spacing: 1px;
+  }
+
+  /* SECTIONS GENERAL */
+  section { padding: 90px 5%; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--amber); font-weight: 600; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 5vw, 64px);
+    letter-spacing: 1.5px; color: var(--white); line-height: 1;
+  }
+  .section-title .amber { color: var(--amber); }
+
+  /* ABOUT */
+  #about { background: var(--charcoal); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 48px; }
+  .about-img-wrap {
+    position: relative; border-radius: 6px; overflow: hidden;
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #1a2010, #0d1208);
+    border: 1px solid rgba(245,166,35,0.15);
+  }
+  .about-img-placeholder {
+    width:100%; height:100%; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:12px;
+    color: rgba(245,166,35,0.3); font-family:'Bebas Neue',sans-serif;
+    font-size: 1.2rem; letter-spacing: 3px;
+  }
+  .about-img-placeholder .big-icon { font-size: 4rem; opacity: 0.4; }
+  .about-corner {
+    position: absolute; bottom: 20px; right: 20px;
+    background: var(--amber); color: var(--black);
+    padding: 12px 18px; border-radius: 4px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem; letter-spacing: 1px; line-height: 1.2; text-align: center;
+  }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-size: 0.95rem; }
+  .about-text p strong { color: var(--cream); }
+  .about-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 32px; }
+  .stat { text-align: center; padding: 20px 10px; background: rgba(245,166,35,0.05); border: 1px solid rgba(245,166,35,0.1); border-radius: 4px; }
+  .stat-num { font-family: 'Bebas Neue',sans-serif; font-size: 2.4rem; color: var(--amber); line-height: 1; }
+  .stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+  /* WHY CHOOSE US */
+  #why { background: var(--moss); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 24px; margin-top: 48px; }
+  .why-card {
+    background: rgba(245,166,35,0.04); border: 1px solid rgba(245,166,35,0.1);
+    border-radius: 6px; padding: 32px 24px;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .why-card:hover { border-color: rgba(245,166,35,0.4); transform: translateY(-4px); }
+  .why-icon { font-size: 2rem; margin-bottom: 16px; }
+  .why-card h3 { font-family: 'Bebas Neue',sans-serif; font-size: 1.3rem; letter-spacing: 1px; color: var(--white); margin-bottom: 10px; }
+  .why-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+  /* SERVICES */
+  #services { background: var(--black); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 2px; margin-top: 48px;
+    background: rgba(245,166,35,0.08); border-radius: 8px; overflow: hidden;
+  }
+  .service-card {
+    background: var(--charcoal); padding: 36px 32px;
+    transition: background 0.25s; position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: var(--amber); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: #222; }
+  .service-price { font-family: 'Bebas Neue',sans-serif; font-size: 1.8rem; color: var(--amber); margin-bottom: 8px; }
+  .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+  .service-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; font-style: italic; }
+  .service-badge {
+    display: inline-block; margin-top: 16px;
+    background: var(--amber-glow); border: 1px solid rgba(245,166,35,0.25);
+    color: var(--amber); font-size: 0.7rem; padding: 4px 12px; border-radius: 20px;
+    font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* GALLERY */
+  #gallery { background: var(--charcoal); }
+  .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 40px; }
+  .gallery-item {
+    aspect-ratio: 1; border-radius: 4px; overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+    border: 1px solid rgba(245,166,35,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; color: rgba(245,166,35,0.2);
+    position: relative; cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .gallery-item:hover { transform: scale(1.02); border-color: rgba(245,166,35,0.3); }
+  .gallery-item img { width:100%; height:100%; object-fit:cover; }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-caption { margin-top: 12px; text-align: center; font-size: 0.8rem; color: var(--muted); letter-spacing: 1px; font-style: italic; }
+
+  /* TEAM */
+  #team { background: var(--moss); }
+  .team-tagline { margin-top: 4px; color: var(--muted); font-size: 0.9rem; font-style: italic; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 28px; margin-top: 48px; }
+  .team-card {
+    background: var(--charcoal); border-radius: 8px; overflow: hidden;
+    border: 1px solid rgba(245,166,35,0.1);
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .team-card:hover { transform: translateY(-6px); border-color: rgba(245,166,35,0.35); }
+  .team-avatar {
+    height: 220px; background: linear-gradient(135deg, #1a2010, #0d1208);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; color: rgba(245,166,35,0.25); position: relative;
+  }
+  .team-avatar img { width:100%; height:100%; object-fit:cover; }
+  .team-avatar-label {
+    position: absolute; bottom: 12px; left: 12px;
+    background: var(--amber); color: var(--black);
+    padding: 4px 12px; border-radius: 2px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .team-info { padding: 24px; }
+  .team-info h3 { font-family: 'Bebas Neue',sans-serif; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); }
+  .team-role { font-size: 0.75rem; color: var(--amber); letter-spacing: 2px; text-transform: uppercase; margin: 4px 0 12px; font-weight: 600; }
+  .team-info p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; font-style: italic; }
+  .team-quote { margin-top: 14px; padding: 12px 16px; background: rgba(245,166,35,0.06); border-left: 3px solid var(--amber); border-radius: 0 4px 4px 0; }
+  .team-quote p { font-style: italic; color: var(--cream); font-size: 0.82rem; }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--black); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 24px; margin-top: 48px; }
+  .testimonial-card {
+    background: var(--charcoal); border-radius: 8px; padding: 32px;
+    border: 1px solid rgba(245,166,35,0.08);
+    transition: border-color 0.25s; position: relative;
+  }
+  .testimonial-card:hover { border-color: rgba(245,166,35,0.3); }
+  .testimonial-card::before {
+    content: '"'; position: absolute; top: 16px; right: 24px;
+    font-family: 'Bebas Neue',sans-serif; font-size: 5rem;
+    color: rgba(245,166,35,0.08); line-height: 1;
+  }
+  .stars { color: var(--amber); font-size: 0.85rem; margin-bottom: 14px; letter-spacing: 2px; }
+  .testimonial-card p { font-size: 0.9rem; color: var(--cream); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--amber-glow); border: 2px solid var(--amber);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--amber); font-size: 0.9rem;
+  }
+  .author-name { font-weight: 700; color: var(--white); font-size: 0.88rem; }
+  .author-tag { font-size: 0.75rem; color: var(--muted); }
+
+  /* BOOKING */
+  #booking { background: linear-gradient(135deg, #0F0F0F 0%, #1A1A0A 100%); }
+  .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
+  .booking-info h3 { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; color:var(--white); margin-bottom:20px; }
+  .info-row { display:flex; align-items:flex-start; gap:14px; margin-bottom:20px; }
+  .info-icon { font-size:1.3rem; margin-top:2px; flex-shrink:0; }
+  .info-label { font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--amber); font-weight:600; margin-bottom:4px; }
+  .info-value { font-size:0.92rem; color:var(--cream); line-height:1.6; }
+  .booking-form { background:var(--charcoal); border-radius:8px; padding:40px; border:1px solid rgba(245,166,35,0.12); }
+  .booking-form h3 { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; color:var(--white); margin-bottom:6px; }
+  .booking-form > p { font-size:0.85rem; color:var(--muted); margin-bottom:28px; }
+  .form-group { margin-bottom:18px; }
+  .form-group label { display:block; font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; font-weight:500; }
+  .form-group input, .form-group select, .form-group textarea {
+    width:100%; background:var(--dark); border:1px solid rgba(245,166,35,0.15);
+    border-radius:4px; padding:13px 16px; color:var(--cream);
+    font-family:'Inter',sans-serif; font-size:0.9rem;
+    transition:border-color 0.2s; outline:none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--amber); }
+  .form-group select option { background:var(--dark); }
+  .whatsapp-btn {
+    width:100%; background:#25D366; color:#fff;
+    border:none; padding:16px; border-radius:4px;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:0.95rem;
+    letter-spacing:1px; text-transform:uppercase;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
+    transition:background 0.2s, transform 0.1s; margin-top:8px;
+  }
+  .whatsapp-btn:hover { background:#1ebe58; transform:translateY(-2px); }
+  .whatsapp-btn svg { width:22px; height:22px; fill:#fff; }
+
+  /* FOOTER */
+  footer {
+    background:#060606; padding:48px 5% 28px;
+    border-top:1px solid rgba(245,166,35,0.1);
+  }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:48px; }
+  .footer-brand .nav-logo { font-size:1.8rem; display:block; margin-bottom:12px; }
+  .footer-brand p { font-size:0.85rem; color:var(--muted); line-height:1.7; max-width:280px; }
+  .footer-social { display:flex; gap:12px; margin-top:20px; }
+  .social-link {
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid rgba(245,166,35,0.2);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--muted); text-decoration:none; font-size:0.85rem;
+    transition:all 0.2s;
+  }
+  .social-link:hover { border-color:var(--amber); color:var(--amber); }
+  footer h4 { font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--amber); font-weight:600; margin-bottom:16px; }
+  footer ul { list-style:none; }
+  footer ul li { margin-bottom:10px; }
+  footer ul a { color:var(--muted); text-decoration:none; font-size:0.875rem; transition:color 0.2s; }
+  footer ul a:hover { color:var(--amber); }
+  .footer-bottom {
+    margin-top:40px; padding-top:20px;
+    border-top:1px solid rgba(255,255,255,0.04);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+  .footer-bottom p { font-size:0.78rem; color:rgba(138,138,138,0.5); }
+
+  /* FLOATING WHATSAPP */
+  .float-wa {
+    position:fixed; bottom:28px; right:28px; z-index:200;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    text-decoration:none; box-shadow:0 4px 20px rgba(37,211,102,0.4);
+    animation:float-bounce 3s ease-in-out infinite;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .float-wa:hover { transform:scale(1.1) !important; box-shadow:0 6px 28px rgba(37,211,102,0.6); animation:none; }
+  .float-wa svg { width:30px; height:30px; fill:#fff; }
+  @keyframes float-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display:none; }
+    .hamburger { display:flex; }
+    .about-grid, .booking-grid { grid-template-columns:1fr; }
+    .gallery-grid { grid-template-columns:repeat(2,1fr); }
+    .gallery-item.wide { grid-column:span 1; }
+    .footer-grid { grid-template-columns:1fr; gap:32px; }
+    .hero-btns { flex-direction:column; max-width:280px; }
+    .about-stats { grid-template-columns:repeat(3,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">FADE <span>MTAANI</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Book Now</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">FADE</div>
+  <div class="hero-content">
+    <div class="hero-badge">📍 Nakuru's Finest Barbershop</div>
+    <h1 class="hero-title">
+      FRESH<br>
+      <span class="amber">FADE.</span><br>
+      ZERO STRESS.
+    </h1>
+    <p class="hero-subtitle">
+      Toka mtaani na the cleanest taper, skin fade, or beard game yaiko.
+      <strong>Nakuru's finest barbershop</strong> — where style meets poa vibes.
+      Our barbers wame train in latest trends from Nairobi, Dubai, na even international fades.
+    </p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-primary">✂️ Book Appointment Sasa</a>
+      <a href="#services" class="btn-secondary">View Services →</a>
+    </div>
+    <p class="hero-tagline">"From zero to hero in 30 mins. Utapenda the results!"</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who We Are</div>
+  <h2 class="section-title">FADE <span class="amber">MTAANI</span></h2>
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <div class="about-img-placeholder">
+        <div class="big-icon">✂️</div>
+        <div>FADE MTAANI</div>
+        <div style="font-size:0.75rem;letter-spacing:2px;opacity:0.5">NAKURU</div>
+      </div>
+      <div class="about-corner">10+<br><span style="font-size:0.7rem;letter-spacing:1px">YRS CUTTING</span></div>
+    </div>
+    <div class="about-text">
+      <p>Sisi ni <strong>Fade Mtaani</strong> — the ultimate barbershop in Nakuru. Tumeanza kama small spot, saa tuko <strong>the spot</strong> for every msee anataka kuonekana sharp.</p>
+      <p>Hapa, haircut si tu haircut — ni <strong>confidence boost, ni culture, ni freshness level 100.</strong> Whether u ni corporate guy au msee wa streets, we got you.</p>
+      <p>Our barbers wame train in the latest trends from <strong>Nairobi, Dubai, na even international fades.</strong> Hakuna mchezo na quality.</p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Yrs Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Expert Barbers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="section-label">Why We're Different</div>
+  <h2 class="section-title">WHY CHOOSE <span class="amber">US?</span></h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">💈</div>
+      <h3>Experienced Crew</h3>
+      <p>Barbers ambao wanajua kila style: Low Fade, Mid Fade, Burst, Caesar, Afro Taper, na Sheng-inspired cuts. Masters wa kila style.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⭐</div>
+      <h3>Premium Products</h3>
+      <p>Only best pomades, oils, na aftershaves. No cheap stuff — your hair deserves the best products tu. Hakuna shortcuts.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎵</div>
+      <h3>Chill Vibes</h3>
+      <p>Good music, WiFi, na msee anaeza relax kama home. Barbershop experience yenye vibe — not just a haircut.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📍</div>
+      <h3>Nakuru Proud</h3>
+      <p>Serving Lake View, CBD, Milimani, na beyond. Tuko hapo kwa community yetu — sio tu business, ni passion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Offer</div>
+  <h2 class="section-title">OUR <span class="amber">SERVICES</span></h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-price">Ksh 800</div>
+      <h3>✂️ Signature Fade</h3>
+      <p>"The cleanest taper na skin fade. Utaacha mabibi wakikufollow!"</p>
+      <span class="service-badge">Most Popular</span>
+    </div>
+    <div class="service-card">
+      <div class="service-price">Ksh 700</div>
+      <h3>🧔 Beard Grooming + Trim</h3>
+      <p>"Shape up hiyo beard game. From jungle to masterpiece. No more manzi akisema 'bro!'"</p>
+    </div>
+    <div class="service-card">
+      <div class="service-price">Ksh 1,200</div>
+      <h3>🚿 Full Haircut + Wash</h3>
+      <p>"Deluxe treatment. Head massage, wash, style. Feel like a boss msee."</p>
+    </div>
+    <div class="service-card">
+      <div class="service-price">Ksh 500</div>
+      <h3>👦 Kids Cut</h3>
+      <p>"For the young kings. Make your boy sharp kama baba."</p>
+    </div>
+    <div class="service-card">
+      <div class="service-price">from Ksh 1,500</div>
+      <h3>🎨 Hair Colour / Design</h3>
+      <p>"Custom lines, patterns, au colour pop. Express yourself!"</p>
+    </div>
+    <div class="service-card">
+      <div class="service-price">Ksh 2,500</div>
+      <h3>👑 VIP Package</h3>
+      <p>"Hair + Beard + Facial + Massage. Utatoka kama celebrity."</p>
+      <span class="service-badge">Premium</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header">
+    <div>
+      <div class="section-label">Fresh From The Chair</div>
+      <h2 class="section-title">OUR <span class="amber">WORK</span></h2>
+    </div>
+    <a href="https://wa.me/254793927304?text=Nishow%20more%20gallery%20ya%20Fade%20Mtaani" target="_blank" class="btn-secondary" style="font-size:0.78rem;padding:10px 20px">View All Work ↗</a>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item wide" style="background:linear-gradient(135deg,#1a2010,#0d1208)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(245,166,35,0.3)">
+        <div style="font-size:3rem">✂️</div>
+        <div style="font-family:'Bebas Neue';letter-spacing:3px;font-size:1rem">BEARD GAME UPGRADED</div>
+      </div>
+    </div>
+    <div class="gallery-item">💈</div>
+    <div class="gallery-item">✂️</div>
+    <div class="gallery-item wide" style="background:linear-gradient(135deg,#0d1208,#1a2010)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(245,166,35,0.3)">
+        <div style="font-size:3rem">🔥</div>
+        <div style="font-family:'Bebas Neue';letter-spacing:3px;font-size:1rem">NAKURU BOYS REPRESENTING</div>
+      </div>
+    </div>
+    <div class="gallery-item">🧔</div>
+  </div>
+  <p class="gallery-caption">"The taper killed • Msee alitoka kaa a newman" — Fresh from the chair</p>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-label">Meet The Crew</div>
+  <h2 class="section-title">"THE <span class="amber">BLADES"</span></h2>
+  <p class="team-tagline">Wanaelewa style</p>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">
+        ✂️
+        <div class="team-avatar-label">Main Barber</div>
+      </div>
+      <div class="team-info">
+        <h3>The Fade Doctor</h3>
+        <div class="team-role">Head Barber · 10+ Years</div>
+        <p>Master of all styles. The OG wa Fade Mtaani. Akikaa na wewe kwa kiti, unajua utaonekana fresh.</p>
+        <div class="team-quote"><p>"Fresh fade ni freshness level 100 — guaranteed."</p></div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">
+        🧔
+        <div class="team-avatar-label">BeardKing</div>
+      </div>
+      <div class="team-info">
+        <h3>The BeardKing</h3>
+        <div class="team-role">Beard Specialist</div>
+        <p>Specialist in grooming. Akifanya kazi na beard yako, utajuta ulikuwa unakaa jungle jana.</p>
+        <div class="team-quote"><p>"Your beard itaongea for itself."</p></div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">
+        🎨
+        <div class="team-avatar-label">Style Queen</div>
+      </div>
+      <div class="team-info">
+        <h3>Lady Fade</h3>
+        <div class="team-role">Designs & Ladies' Trims</div>
+        <p>For the creative cuts na ladies trims too. Designs za kujiambia — custom lines, patterns, na colour work.</p>
+        <div class="team-quote"><p>"For the creative cuts na ladies trims too."</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-label">What The Streets Are Saying</div>
+  <h2 class="section-title">CLIENT <span class="amber">REVIEWS</span></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Haye never looked better. Shukran Fade Mtaani — you guys are the real deal. Nakuru inajua."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">K</div>
+        <div>
+          <div class="author-name">Kevin</div>
+          <div class="author-tag">Regular Client · CBD</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Best beard trim in town. Service ni fast and professional. Hakuna stress — unaenda ukiwa boss."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Alex</div>
+          <div class="author-tag">Regular Client · Milimani</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"My son anapenda hapa — hair cuts is clean na affordable. Mama wa mtoto anaweza kuleta mtoto bila wasiwasi."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">M</div>
+        <div>
+          <div class="author-name">Mama J</div>
+          <div class="author-tag">Parent · Lake View</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-label">Visit Us</div>
+  <h2 class="section-title">BOOK YOUR <span class="amber">SPOT</span></h2>
+  <div class="booking-grid">
+    <div class="booking-info">
+      <h3>Location & Hours</h3>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Location</div>
+          <div class="info-value">Stone Plaza, Nakuru<br><span style="color:var(--muted);font-size:0.82rem">@fademtaani_nakuru</span></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🕐</div>
+        <div>
+          <div class="info-label">Working Hours</div>
+          <div class="info-value">Mon – Sat: 8AM – 8PM<br>Sunday: 9AM – 5PM</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📱</div>
+        <div>
+          <div class="info-label">WhatsApp / Call</div>
+          <div class="info-value">+254 793 927 304</div>
+        </div>
+      </div>
+      <div style="margin-top:32px;padding:24px;background:rgba(245,166,35,0.05);border:1px solid rgba(245,166,35,0.12);border-radius:6px">
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;font-style:italic">"Don't just look good — lookin Msee Basi. Book today."</p>
+        <a href="https://wa.me/254793927304?text=Habari!%20Nataka%20kufanya%20booking%20ya%20haircut%20kwa%20Fade%20Mtaani%20Nakuru%20%F0%9F%92%88" target="_blank" class="btn-primary" style="display:inline-flex;width:100%;justify-content:center;text-decoration:none">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="booking-form">
+      <h3>Book Your Appointment</h3>
+      <p>Fill in your details na tutakutext via WhatsApp to confirm. Usikose spot yako!</p>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="name" placeholder="e.g. John Kamau" />
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="e.g. 0712 345 678" />
+      </div>
+      <div class="form-group">
+        <label>Service</label>
+        <select id="service">
+          <option value="">— Select Service —</option>
+          <option value="Signature Fade - Ksh 800">Signature Fade – Ksh 800</option>
+          <option value="Beard Grooming + Trim - Ksh 700">Beard Grooming + Trim – Ksh 700</option>
+          <option value="Full Haircut + Wash - Ksh 1,200">Full Haircut + Wash – Ksh 1,200</option>
+          <option value="Kids Cut - Ksh 500">Kids Cut – Ksh 500</option>
+          <option value="Hair Colour / Design - from Ksh 1,500">Hair Colour / Design – from Ksh 1,500</option>
+          <option value="VIP Package - Ksh 2,500">VIP Package (Hair + Beard + Facial) – Ksh 2,500</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred Date & Time</label>
+        <input type="datetime-local" id="datetime" />
+      </div>
+      <div class="form-group">
+        <label>Any Special Request? (Optional)</label>
+        <textarea id="notes" rows="3" placeholder="e.g. Low fade with design on the side..."></textarea>
+      </div>
+      <button class="whatsapp-btn" onclick="bookOnWhatsApp()">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send Booking via WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo">FADE <span>MTAANI</span></a>
+      <p>Nakuru's finest barbershop. Fresh fades, clean trims, poa vibes. Tuko hapo kwa community yetu — Stone Plaza, Nakuru.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/254793927304" target="_blank" class="social-link" title="WhatsApp">📱</a>
+        <a href="https://instagram.com/fademtaani_nakuru" target="_blank" class="social-link" title="Instagram">📸</a>
+      </div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#team">Our Team</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+254793927304">+254 793 927 304</a></li>
+        <li><a href="https://wa.me/254793927304" target="_blank">WhatsApp Us</a></li>
+        <li><a href="#">Stone Plaza, Nakuru</a></li>
+        <li><a href="#">@fademtaani_nakuru</a></li>
+      </ul>
+      <div style="margin-top:20px;font-size:0.78rem;color:var(--muted);line-height:1.7">
+        Mon–Sat: 8AM–8PM<br>Sunday: 9AM–5PM
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Fade Mtaani, Nakuru. All rights reserved.</p>
+    <p style="color:rgba(245,166,35,0.4);font-style:italic">"Don't just look good — lookin' Msee Basi."</p>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/254793927304?text=Habari!%20Nataka%20kufanya%20booking%20kwa%20Fade%20Mtaani%20Nakuru%20%F0%9F%92%88" target="_blank" class="float-wa" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Mobile hamburger menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    const cta = document.querySelector('nav .nav-cta');
+    if (links.style.display === 'flex') {
+      links.style.display = '';
+      cta.style.display = '';
+    } else {
+      links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.97);padding:24px 5%;gap:20px;border-bottom:1px solid rgba(245,166,35,0.15);z-index:99';
+      cta.style.cssText = 'display:block;position:fixed;top:260px;left:5%;right:5%;text-align:center;z-index:99';
+    }
+  }
+
+  // Shrink nav on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.padding = window.scrollY > 50 ? '12px 5%' : '18px 5%';
+  });
+
+  // WhatsApp booking
+  function bookOnWhatsApp() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    const datetime = document.getElementById('datetime').value;
+    const notes = document.getElementById('notes').value.trim();
+
+    if (!name || !service) {
+      alert('Tafadhali weka jina lako na chagua service kwanza! 😊');
+      return;
+    }
+
+    let msg = `Habari! 👋 Nataka kufanya booking kwa *Fade Mtaani Nakuru* ✂️\n\n`;
+    msg += `*Jina:* ${name}\n`;
+    if (phone) msg += `*Namba:* ${phone}\n`;
+    msg += `*Service:* ${service}\n`;
+    if (datetime) {
+      const d = new Date(datetime);
+      msg += `*Tarehe/Saa:* ${d.toLocaleDateString('en-KE', {weekday:'long',year:'numeric',month:'long',day:'numeric'})} at ${d.toLocaleTimeString('en-KE', {hour:'2-digit',minute:'2-digit'})}\n`;
+    }
+    if (notes) msg += `*Special Request:* ${notes}\n`;
+    msg += `\nAsante! 🔥`;
+
+    window.open(`https://wa.me/254793927304?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.why-card, .service-card, .team-card, .testimonial-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
